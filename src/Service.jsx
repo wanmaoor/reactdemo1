@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import ServiceItem from './ServiceItem';
 export default class Service extends Component {
   constructor(props) {
     super(props);
@@ -24,12 +25,12 @@ export default class Service extends Component {
         <ul>
           {this.state.list.map((item, index) => {
             return (
-              <li
-                key={index + item}
-                onClick={this.deleteClick.bind(this, index)}
-              >
-                {item}
-              </li>
+              <ServiceItem
+               content={item}
+               key={index+item}
+               index={index}
+               deleteItem={this.deleteClick.bind(this)}
+              />
             );
           })}
         </ul>
@@ -52,7 +53,6 @@ export default class Service extends Component {
     });
   };
   deleteClick(index) {
-    console.log(index);
     let list = this.state.list;
     list.splice(index, 1);
     this.setState({
