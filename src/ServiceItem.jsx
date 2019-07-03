@@ -10,6 +10,11 @@ export default class ServiceItem extends Component {
   handleClick = ()=>{
     this.props.deleteItem(this.props.children)
   }
+  // 第一次存在于virtual DOM 裏不會執行, 而後面則會
+  // 在子組件執行
+  componentWillReceiveProps(){
+    console.log('componentWillReceiveProps');
+  }
 }
 
 // propType validation

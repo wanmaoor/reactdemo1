@@ -9,6 +9,7 @@ export default class Service extends Component {
     };
   }
   render() {
+    console.log('rendering - 渲染中...')
     return (
       <Fragment>
         <div>
@@ -40,6 +41,30 @@ export default class Service extends Component {
       </Fragment>
     );
   }
+
+  componentWillMount(){
+    console.log('1 - componentWillMount - 挂載組件前');
+  }
+
+  componentDidMount(){
+    console.log('2 - componentDidMount - 組件挂載后')
+  }
+  
+  shouldComponentUpdate(){
+    console.log('3 - shouldComponentUpdate - 組件應該會更新') //即便在輸入框輸入内容, 也觸發了shouldComponentUpdate函數
+    return true //必須有返回值, 如果是false則不往下執行
+  }
+
+  componentWillUpdate(){
+    console.log('4 - componentWillUpdate - 組件將更新')
+  }
+
+  componentDidUpdate(){
+    console.log('5 - componentDidUpdate - 組件完成更新');
+  }
+
+  
+  
   handleChange = () => {
     this.setState({
       inputValue: this.input.value
