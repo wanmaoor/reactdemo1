@@ -11,7 +11,9 @@ export default class Service extends Component {
     return (
       <Fragment>
         <div>
+          <label htmlFor="service">add service:</label>
           <input
+            id="service"
             type="text"
             value={this.state.inputValue}
             onChange={this.handleChange}
@@ -51,10 +53,10 @@ export default class Service extends Component {
   };
   deleteClick(index) {
     console.log(index);
-    let list = this.state.list
-    list.splice(index, 1)
+    let list = this.state.list;
+    list.splice(index, 1);
     this.setState({
       list: list
-    })
+    });
   }
 }
