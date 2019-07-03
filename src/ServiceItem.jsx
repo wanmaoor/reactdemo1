@@ -4,9 +4,7 @@ export default class ServiceItem extends Component {
 
   render() {
     return (
-      <div>
         <li onClick={this.handleClick}>{this.props.content}</li>
-      </div>
     )
   }
   handleClick = ()=>{

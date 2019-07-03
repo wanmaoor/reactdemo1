@@ -19,17 +19,20 @@ export default class Service extends Component {
             value={this.state.inputValue}
             onChange={this.handleChange}
             placeholder="input service you want"
+            ref={(input) => {this.input = input}}
           />
           <button onClick={this.handleClick}>add</button>
         </div>
-        <ul>
+        <ul
+          ref={(ul)=>{this.ul=ul}}
+        >
           {this.state.list.map((item, index) => {
             return (
               <ServiceItem
-               content={item}
-               key={index+item}
-               index={index}
-               deleteItem={this.deleteClick.bind(this)}
+                content={item}
+                key={index + item}
+                index={index}
+                deleteItem={this.deleteClick.bind(this)}
               />
             );
           })}
@@ -37,9 +40,9 @@ export default class Service extends Component {
       </Fragment>
     );
   }
-  handleChange = e => {
+  handleChange = () => {
     this.setState({
-      inputValue: e.target.value
+      inputValue: this.input.value
     });
   };
   handleClick = () => {
@@ -50,8 +53,9 @@ export default class Service extends Component {
     this.setState({
       list: [...this.state.list, this.state.inputValue],
       inputValue: ""
-    });
+    }, ()=>{console.log(this.ul.querySelectorAll('li').length)}); //操作虚拟DOM是异步操作,打印操作会在虚拟DOM操作完前就执行,所以永远少一个.二放在setState里就会让打印操作变为同步式的
   };
+
   deleteClick(index) {
     let list = this.state.list;
     list.splice(index, 1);
