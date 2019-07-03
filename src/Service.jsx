@@ -53,7 +53,7 @@ export default class Service extends Component {
     this.setState({
       list: [...this.state.list, this.state.inputValue],
       inputValue: ""
-    }, ()=>{console.log(this.ul.querySelectorAll('li').length)}); //操作虚拟DOM是异步操作,打印操作会在虚拟DOM操作完前就执行,所以永远少一个.二放在setState里就会让打印操作变为同步式的
+    }, ()=>{console.log(this.ul.querySelectorAll('li').length)}); //操作虚拟DOM是异步操作,打印操作会在虚拟DOM操作完前就执行,所以永远少一个.而放在setState里作为第二个参数的作用是作为回调函数执行异步结果
   };
 
   deleteClick(index) {
