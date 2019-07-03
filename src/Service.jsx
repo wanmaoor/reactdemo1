@@ -4,29 +4,42 @@ export default class Service extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      list: []
+      list: ["阿斯顿`", "bb"]
     };
   }
   render() {
     return (
       <Fragment>
         <div>
-          <input type="text" value={this.state.inputValue} onChange={this.handleChange} placeholder="input service you want"/>
+          <input
+            type="text"
+            value={this.state.inputValue}
+            onChange={this.handleChange}
+            placeholder="input service you want"
+          />
           <button onClick={this.handleClick}>add</button>
         </div>
         <ul>
-          <li>酒水</li>
-          <li>餐饮</li>
+          {this.state.list.map((item, index) => {
+            return <li>{item}</li>;
+          })}
         </ul>
       </Fragment>
     );
   }
-  handleChange = (e)=>{
+  handleChange = e => {
     this.setState({
       inputValue: e.target.value
-    })
-  }
-  handleClick = (e) => {
-
-  }
+    });
+  };
+  handleClick = () => {
+    if (!this.state.inputValue) {
+      alert("input something");
+      return;
+    }
+    this.setState({
+      list: [...this.state.list, this.state.inputValue],
+      inputValue: ""
+    });
+  };
 }
