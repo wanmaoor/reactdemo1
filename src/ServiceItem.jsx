@@ -4,17 +4,26 @@ export default class ServiceItem extends Component {
 
   render() {
     return (
-        <li onClick={this.handleClick}>{this.props.content}</li>
+      <li onClick={this.handleClick}>{this.props.content}</li>
     )
   }
-  handleClick = ()=>{
+  handleClick = () => {
     this.props.deleteItem(this.props.children)
   }
   // 第一次存在于virtual DOM 裏不會執行, 而後面則會
   // 在子組件執行
-  componentWillReceiveProps(){
+  componentWillReceiveProps() {
     console.log('componentWillReceiveProps');
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    // return nextProps.content !== this.props.content ? true : false
+    if (nextProps.content !== this.props.content) {
+      return true
+    } else {
+      return false
+    }
+  }
+
 }
 
 // propType validation
