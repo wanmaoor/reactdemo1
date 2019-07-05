@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import ServiceItem from './ServiceItem';
+import axios from 'axios'
 export default class Service extends Component {
   constructor(props) {
     super(props);
@@ -20,12 +21,12 @@ export default class Service extends Component {
             value={this.state.inputValue}
             onChange={this.handleChange}
             placeholder="input service you want"
-            ref={(input) => {this.input = input}}
+            ref={(input) => { this.input = input }}
           />
           <button onClick={this.handleClick}>add</button>
         </div>
         <ul
-          ref={(ul)=>{this.ul=ul}}
+          ref={(ul) => { this.ul = ul }}
         >
           {this.state.list.map((item, index) => {
             return (
@@ -42,30 +43,33 @@ export default class Service extends Component {
     );
   }
 
-  componentWillMount(){
+  componentWillMount() {
     // console.log('1 - componentWillMount - 挂載組件前');
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // console.log('2 - componentDidMount - 組件挂載后')
+    // put axios in there generaly
+    axios.get('https://jsonplaceholder.typicode.com/todos/1')
+      .then((res) => { console.log(res); })
   }
-  
-  shouldComponentUpdate(nextProps, nextState){
+
+  shouldComponentUpdate(nextProps, nextState) {
     // console.log('3 - shouldComponentUpdate - 組件應該會更新') //即便在輸入框輸入内容, 也觸發了shouldComponentUpdate函數
     // return true //必須有返回值, 如果是false則不往下執行
     return true
   }
 
-  componentWillUpdate(){
+  componentWillUpdate() {
     // console.log('4 - componentWillUpdate - 組件將更新')
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     // console.log('5 - componentDidUpdate - 組件完成更新');
   }
 
-  
-  
+
+
   handleChange = () => {
     this.setState({
       inputValue: this.input.value
@@ -79,7 +83,7 @@ export default class Service extends Component {
     this.setState({
       list: [...this.state.list, this.state.inputValue],
       inputValue: ""
-    }, ()=>{console.log(this.ul.querySelectorAll('li').length)}); //操作虚拟DOM是异步操作,打印操作会在虚拟DOM操作完前就执行,所以永远少一个.而放在setState里作为第二个参数的作用是作为回调函数执行异步结果
+    }, () => { console.log(this.ul.querySelectorAll('li').length) }); //操作虚拟DOM是异步操作,打印操作会在虚拟DOM操作完前就执行,所以永远少一个.而放在setState里作为第二个参数的作用是作为回调函数执行异步结果
   };
 
   deleteClick(index) {

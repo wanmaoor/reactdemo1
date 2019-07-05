@@ -16,7 +16,6 @@ export default class ServiceItem extends Component {
     console.log('componentWillReceiveProps');
   }
   shouldComponentUpdate(nextProps, nextState) {
-    // return nextProps.content !== this.props.content ? true : false
     if (nextProps.content !== this.props.content) {
       return true
     } else {
