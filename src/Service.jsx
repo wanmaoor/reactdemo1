@@ -6,7 +6,7 @@ export default class Service extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      list: ["阿斯顿`", "bb"]
+      list: []
     };
   }
   render() {
@@ -50,8 +50,13 @@ export default class Service extends Component {
   componentDidMount() {
     // console.log('2 - componentDidMount - 組件挂載后')
     // put axios in there generaly
-    axios.get('https://jsonplaceholder.typicode.com/todos/1')
-      .then((res) => { console.log(res); })
+    axios.get('https://www.easy-mock.com/mock/5d1ec47e97713560f50b613d/reactdemo1/service')
+      .then((res) => { 
+        console.log(res);
+        this.setState({
+          list: res.data.data
+        })
+       })
   }
 
   shouldComponentUpdate(nextProps, nextState) {
